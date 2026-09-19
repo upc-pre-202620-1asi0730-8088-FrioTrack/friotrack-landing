@@ -1,222 +1,654 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-419">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FríoTrack – Cold chain monitoring for small businesses</title>
-<meta name="description" content="Affordable cold-chain monitoring and traceability for small food and pharmacy businesses. Track temperature, get alerts, avoid losses." />
-<meta name="keywords" content="cold chain, cadena de frío, monitoreo temperatura, trazabilidad alimentos" />
-<meta name="author" content="BlackStartup Team - UPC" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E%E2%9D%84%EF%B8%8F%3C/text%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FríoTrack | Monitoreo de la cadena de frío en transporte</title>
+    <meta name="description" content="Monitorea en tiempo casi real la temperatura, la humedad y la ubicación de tus unidades refrigeradas. Recibe alertas y consulta el historial del viaje.">
+    <meta name="keywords" content="cadena de frío, transporte refrigerado, monitoreo de temperatura, trazabilidad, alertas, Perú">
+    <meta name="author" content="BlackStartup">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0F172A">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="FríoTrack">
+    <meta property="og:title" content="FríoTrack | Monitoreo de la cadena de frío en transporte">
+    <meta property="og:description" content="Sabe en todo momento si tu carga refrigerada sigue en rango.">
+    <meta property="og:image" content="https://upc-pre-202620-1asi0730-8088-friotrack.github.io/friotrack-landing/assets/images/og-friotrack.png">
+    <meta property="og:image:alt" content="FríoTrack: monitoreo de la cadena de frío en el transporte terrestre">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+    <!-- Iconos (sprite SVG reutilizable con <use>) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14.76V4a2 2 0 0 0-4 0v10.76a4 4 0 1 0 4 0z"/></symbol>
+            <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
+            <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></symbol>
+            <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+            <symbol id="i-truck" viewBox="0 0 24 24"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+            <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+            <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.8 1.1z"/></symbol>
+            <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+            <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        </defs>
+    </svg>
 
-<a class="skip-link" href="#main-content">Skip to main content</a>
+    <a class="skip-link" href="#main" data-i18n="skip">Saltar al contenido</a>
 
-<header class="site-header" role="banner">
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <a href="#top" class="brand" aria-label="FríoTrack home">
-      <span class="brand-icon" aria-hidden="true">❄️</span>
-      <span class="brand-name">FríoTrack</span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="#how-it-works" data-i18n="nav.how">How it works</a></li>
-      <li><a href="#segments" data-i18n="nav.segments">Who it's for</a></li>
-      <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
-      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
-      <li class="nav-lang">
-        <button id="langToggle" aria-label="Switch language">ES</button>
-      </li>
-      <li><a class="btn btn-primary btn-small" href="#contact" data-i18n="nav.cta">Get started</a></li>
-    </ul>
-  </nav>
-</header>
+    <!-- CABECERA -->
+    <header class="site-header" id="siteHeader">
+        <div class="wrap header-inner">
+            <a class="brand" href="#hero" data-i18n-aria="logo_label" aria-label="FríoTrack, ir al inicio">
+                <img src="assets/images/logo.svg" alt="" width="36" height="36">
+                <span class="brand-name">FríoTrack</span>
+            </a>
 
-<main id="main-content">
+            <div class="header-right" id="mobileMenu">
+                <nav class="main-nav" data-i18n-aria="nav_label" aria-label="Navegación principal">
+                    <a href="#hero" data-i18n="nav_home">Inicio</a>
+                    <a href="#about" data-i18n="nav_about">Quiénes somos</a>
+                    <a href="#features" data-i18n="nav_what">Lo que hacemos</a>
+                    <a href="#pricing" data-i18n="nav_pricing">Planes</a>
+                    <a href="#team" data-i18n="nav_team">Equipo</a>
+                    <a href="#contact" data-i18n="nav_contact">Contacto</a>
+                </nav>
+                <div class="nav-actions">
+                    <button type="button" class="btn btn-ghost" id="btnLogin" data-i18n="btn_login">Iniciar sesión</button>
+                    <button type="button" class="btn btn-primary" id="btnRegister" data-i18n="btn_register">Registrarse</button>
+                </div>
+            </div>
 
-  <!-- HERO -->
-  <section id="top" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <h1 data-i18n="hero.title">Know your cold chain never broke.</h1>
-        <p class="hero-subtitle" data-i18n="hero.subtitle">
-          FríoTrack is an affordable way for small bodegas, restaurants and pharmacies
-          to monitor, log and get alerted about the temperature of their perishable products —
-          no industrial hardware required.
-        </p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary" data-i18n="hero.ctaPrimary">Get started</a>
-          <a href="#how-it-works" class="btn btn-ghost" data-i18n="hero.ctaSecondary">See how it works</a>
+            <div class="header-controls">
+                <div class="lang-toggle" role="group" data-i18n-aria="lang_label" aria-label="Idioma">
+                    <button type="button" data-lang="es" aria-pressed="true">ES</button>
+                    <button type="button" data-lang="en" aria-pressed="false">EN</button>
+                </div>
+                <button type="button" class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileMenu" data-i18n-aria="menu_open" aria-label="Abrir menú">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
-      </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="device-card">
-          <div class="device-card-header">
-            <span class="dot dot-ok"></span>
-            <span data-i18n="hero.deviceTitle">Storage Point — Cooler A</span>
-          </div>
-          <div class="device-reading">4.2°C</div>
-          <div class="device-status status-ok" data-i18n="hero.deviceStatus">Within safe range</div>
+    </header>
+
+    <main id="main">
+        <!-- HERO -->
+        <section id="hero" class="section hero">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <h1 data-i18n="hero_title">Tu carga perecible, vigilada en cada kilómetro</h1>
+                    <p class="lead" data-i18n="hero_sub">FríoTrack mide la temperatura y la humedad de cada unidad refrigerada en tiempo casi real, te avisa apenas algo se sale del rango y guarda el historial del viaje para auditorías y reclamos.</p>
+                    <div class="hero-actions">
+                        <button type="button" class="btn btn-primary btn-lg action-register" data-i18n="hero_cta">Probar FríoTrack</button>
+                        <a class="btn btn-outline btn-lg" href="#steps" data-i18n="hero_cta2">Ver cómo funciona</a>
+                    </div>
+                    <p class="hero-note" data-i18n="hero_note">Para empresas de transporte refrigerado, productores, exportadores y compradores de alimentos perecibles en el Perú.</p>
+                </div>
+
+                <!-- Panel de simulación: lo construye assets/js/hero-sim.js -->
+                <div class="sim" id="sim" data-state="idle">
+                    <div class="sim-head">
+                        <div>
+                            <p class="sim-unit"><span class="pulse" aria-hidden="true"></span><span data-i18n="sim_unit">Unidad refrigerada</span></p>
+                            <p class="sim-meta">
+                                <span class="chip" data-i18n="sim_cargo">Arándanos</span>
+                                <span class="sim-route"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="sim_route">La Libertad → Lima</span></span>
+                            </p>
+                        </div>
+                        <span class="sim-badge" data-i18n="sim_badge">Simulación</span>
+                    </div>
+
+                    <div class="sim-readouts">
+                        <div>
+                            <span class="lbl" data-i18n="sim_temp">Temperatura</span>
+                            <strong class="readout" id="simTemp">2,0 °C</strong>
+                        </div>
+                        <div>
+                            <span class="lbl" data-i18n="sim_hum">Humedad</span>
+                            <strong class="readout readout-sm" id="simHum">91 %</strong>
+                        </div>
+                        <div class="sim-status" id="simStatus"></div>
+                    </div>
+
+                    <div class="sim-chart" id="simChart"></div>
+
+                    <div class="sim-alert" id="simAlert" role="status" aria-live="polite"></div>
+
+                    <div class="sim-foot">
+                        <button type="button" class="btn btn-sim" id="simToggle"></button>
+                        <p class="sim-note" data-i18n="sim_note">Datos simulados para mostrar cómo funciona el panel.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROBLEMA -->
+        <section id="problem" class="section problem">
+            <div class="wrap">
+                <div class="problem-head">
+                    <h2 data-i18n="prob_title">Cuando el frío se rompe en ruta, nadie sabe cuándo pasó ni de quién es la responsabilidad</h2>
+                    <p class="lead" data-i18n="prob_lead">Un desperfecto en la unidad, una puerta abierta de más o un pico de calor en carretera bastan para alterar la temperatura.</p>
+                </div>
+
+                <dl class="facts">
+                    <div class="fact">
+                        <dt data-i18n="fact1_num">61 de 139</dt>
+                        <dd data-i18n="fact1_txt">Puesto del Perú en el Índice de Desempeño Logístico del Banco Mundial (2023).</dd>
+                    </div>
+                    <div class="fact">
+                        <dt data-i18n="fact2_num">Más de 12 millones</dt>
+                        <dd data-i18n="fact2_txt">de toneladas de alimentos se pierden a lo largo de la cadena productiva peruana.</dd>
+                    </div>
+                    <div class="fact">
+                        <dt data-i18n="fact3_num">41 corredores</dt>
+                        <dd data-i18n="fact3_txt">logísticos identificó el MTC (2023).</dd>
+                    </div>
+                </dl>
+
+                <div class="compare">
+                    <div class="compare-col compare-today">
+                        <h3 data-i18n="cmp_today_title">Hoy, en ruta</h3>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span data-i18n="cmp_today_1">Termómetros manuales o registradores pasivos.</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span data-i18n="cmp_today_2">El conductor se entera al descargar.</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span data-i18n="cmp_today_3">Sin registros objetivos.</span></li>
+                        </ul>
+                    </div>
+                    <div class="compare-col compare-ft">
+                        <h3 data-i18n="cmp_ft_title">Con FríoTrack</h3>
+                        <ul>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="cmp_ft_1">Temperatura y humedad en un solo panel.</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="cmp_ft_2">Alerta automática apenas sale del rango.</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="cmp_ft_3">Historial comprobable del viaje.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="sources" data-i18n="prob_sources">Fuentes: Banco Mundial (2023), FAO (2022), MTC (2023).</p>
+            </div>
+        </section>
+
+        <!-- QUIÉNES SOMOS: MISIÓN Y VISIÓN -->
+        <section id="about" class="section about">
+            <div class="wrap about-grid">
+                <div class="about-copy">
+                    <h2 data-i18n="about_title">Somos BlackStartup</h2>
+                    <p data-i18n="about_p1">Somos una empresa de base tecnológica peruana.</p>
+                    <p data-i18n="about_p2">Trabajamos con quienes mueven, despachan y reciben esa carga.</p>
+                </div>
+                <div class="about-statements">
+                    <article class="statement">
+                        <h3 data-i18n="mission_title">Misión</h3>
+                        <p data-i18n="mission_desc">Proteger la calidad, la frescura y la inocuidad de los alimentos perecibles.</p>
+                    </article>
+                    <article class="statement">
+                        <h3 data-i18n="vision_title">Visión</h3>
+                        <p data-i18n="vision_desc">Ser, hacia 2030, la plataforma líder y referente en trazabilidad.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- LO QUE HACEMOS -->
+        <section id="features" class="section features">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2 data-i18n="feat_title">Lo que hace FríoTrack</h2>
+                    <p class="lead" data-i18n="feat_sub">Todo lo que necesitas para saber cómo va tu carga y demostrarlo después.</p>
+                </div>
+
+                <div class="bento">
+                    <article class="tile tile-dash">
+                        <svg class="icon icon-lg" aria-hidden="true"><use href="#i-thermo"/></svg>
+                        <h3 data-i18n="f1_title">Panel en tiempo casi real</h3>
+                        <p data-i18n="f1_desc">Ve en una sola pantalla la temperatura, la humedad, el estado y la ubicación de cada unidad.</p>
+                        <ul class="tags">
+                            <li data-i18n="f1_tag1">Temperatura</li>
+                            <li data-i18n="f1_tag2">Humedad</li>
+                            <li data-i18n="f1_tag3">GPS</li>
+                            <li data-i18n="f1_tag4">Estado del envío</li>
+                        </ul>
+                    </article>
+                    <article class="tile tile-alert">
+                        <svg class="icon icon-lg" aria-hidden="true"><use href="#i-bell"/></svg>
+                        <h3 data-i18n="f2_title">Alertas automáticas</h3>
+                        <p data-i18n="f2_desc">Recibe un aviso apenas una lectura sale del rango seguro.</p>
+                    </article>
+                    <article class="tile tile-third">
+                        <svg class="icon icon-lg" aria-hidden="true"><use href="#i-history"/></svg>
+                        <h3 data-i18n="f3_title">Historial térmico</h3>
+                        <p data-i18n="f3_desc">Consulta y exporta las lecturas de viajes anteriores.</p>
+                    </article>
+                    <article class="tile tile-third">
+                        <svg class="icon icon-lg" aria-hidden="true"><use href="#i-pin"/></svg>
+                        <h3 data-i18n="f4_title">Mapa de rutas</h3>
+                        <p data-i18n="f4_desc">Sigue el recorrido de cada unidad sobre un mapa interactivo.</p>
+                    </article>
+                    <article class="tile tile-third">
+                        <svg class="icon icon-lg" aria-hidden="true"><use href="#i-truck"/></svg>
+                        <h3 data-i18n="f5_title">Flota y conductores</h3>
+                        <p data-i18n="f5_desc">Registra unidades, asigna conductores y organiza los despachos.</p>
+                    </article>
+                    <article class="tile tile-half">
+                        <svg class="icon icon-lg" aria-hidden="true"><use href="#i-search"/></svg>
+                        <h3 data-i18n="f6_title">Búsqueda y filtros</h3>
+                        <p data-i18n="f6_desc">Encuentra un envío, una unidad o una ruta en segundos.</p>
+                    </article>
+                    <article class="tile tile-half">
+                        <svg class="icon icon-lg" aria-hidden="true"><use href="#i-inbox"/></svg>
+                        <h3 data-i18n="f7_title">Avisos dentro de la aplicación</h3>
+                        <p data-i18n="f7_desc">Las notificaciones llegan a quien corresponde.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CÓMO FUNCIONA -->
+        <section id="steps" class="section steps">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2 data-i18n="steps_title">Empieza en cuatro pasos</h2>
+                    <p class="lead" data-i18n="steps_sub">No necesitas conocimientos técnicos. Te acompañamos en cada paso.</p>
+                </div>
+                <ol class="step-list">
+                    <li>
+                        <span class="step-num" aria-hidden="true">1</span>
+                        <h3 data-i18n="s1_title">Registra tu flota</h3>
+                        <p data-i18n="s1_desc">Da de alta tus unidades refrigeradas y asigna a los conductores.</p>
+                    </li>
+                    <li>
+                        <span class="step-num" aria-hidden="true">2</span>
+                        <h3 data-i18n="s2_title">Define los rangos seguros</h3>
+                        <p data-i18n="s2_desc">Indica la temperatura y la humedad que exige cada tipo de carga.</p>
+                    </li>
+                    <li>
+                        <span class="step-num" aria-hidden="true">3</span>
+                        <h3 data-i18n="s3_title">Sigue cada viaje</h3>
+                        <p data-i18n="s3_desc">Mira las lecturas y la posición de cada unidad en el panel y en el mapa.</p>
+                    </li>
+                    <li>
+                        <span class="step-num" aria-hidden="true">4</span>
+                        <h3 data-i18n="s4_title">Actúa y demuestra</h3>
+                        <p data-i18n="s4_desc">Responde a las alertas y exporta el historial cuando lo necesites.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- CORREDORES -->
+        <section id="corridors" class="section corridors">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2 data-i18n="cor_title">Empezamos por los corredores que abastecen Lima</h2>
+                    <p class="lead" data-i18n="cor_sub">Nuestra zona inicial une los valles agrícolas con los puertos y los centros de abasto de Lima.</p>
+                </div>
+
+                <div class="corridor-grid">
+                    <div class="corridor-side">
+                        <div class="corridor-list" role="group" data-i18n-aria="cor_aria" aria-label="Corredores logísticos">
+                            <button type="button" class="corridor-btn" data-route="piu" aria-pressed="false">
+                                <span class="c-name" data-i18n="c_piu_name">Piura</span>
+                                <span class="c-route" data-i18n="c_piu_route">Hacia Lima</span>
+                            </button>
+                            <button type="button" class="corridor-btn" data-route="lam" aria-pressed="false">
+                                <span class="c-name" data-i18n="c_lam_name">Lambayeque</span>
+                                <span class="c-route" data-i18n="c_lam_route">Hacia Lima</span>
+                            </button>
+                            <button type="button" class="corridor-btn" data-route="lib" aria-pressed="true">
+                                <span class="c-name" data-i18n="c_lib_name">La Libertad</span>
+                                <span class="c-route" data-i18n="c_lib_route">Hacia el puerto de Salaverry y Lima</span>
+                            </button>
+                            <button type="button" class="corridor-btn" data-route="ica" aria-pressed="false">
+                                <span class="c-name" data-i18n="c_ica_name">Ica</span>
+                                <span class="c-route" data-i18n="c_ica_route">Hacia Lima y el puerto del Callao</span>
+                            </button>
+                        </div>
+                        <div class="corridor-detail" aria-live="polite">
+                            <span class="lbl" data-i18n="cor_goods_label">Carga típica</span>
+                            <p id="corridorGoods"></p>
+                        </div>
+                        <p class="corridor-future" data-i18n="cor_future">Más adelante, la plataforma se extenderá a rutas terrestres internacionales de la región.</p>
+                    </div>
+
+                    <figure class="corridor-map">
+                        <svg viewBox="0 0 520 400" role="img" data-i18n-aria="cor_diagram" aria-label="Esquema de los corredores">
+                            <path id="route-piu" class="route" d="M150,50 C300,50 320,275 440,275"/>
+                            <path id="route-lam" class="route" d="M150,125 C300,125 330,275 440,275"/>
+                            <path id="route-lib" class="route" d="M150,200 C290,200 340,275 440,275"/>
+                            <path id="route-ica" class="route" d="M150,350 C300,350 330,275 440,275"/>
+
+                            <g class="node" data-route="piu"><circle cx="150" cy="50" r="8"/><text x="136" y="55" text-anchor="end" data-i18n="c_piu_name">Piura</text></g>
+                            <g class="node" data-route="lam"><circle cx="150" cy="125" r="8"/><text x="136" y="130" text-anchor="end" data-i18n="c_lam_name">Lambayeque</text></g>
+                            <g class="node" data-route="lib"><circle cx="150" cy="200" r="8"/><text x="136" y="205" text-anchor="end" data-i18n="c_lib_name">La Libertad</text></g>
+                            <g class="node" data-route="ica"><circle cx="150" cy="350" r="8"/><text x="136" y="355" text-anchor="end" data-i18n="c_ica_name">Ica</text></g>
+
+                            <g class="hub"><circle cx="440" cy="275" r="15"/><text x="440" y="311" text-anchor="middle" data-i18n="cor_hub">Lima y Callao</text></g>
+
+                            <circle id="truckDot" r="7" cx="0" cy="0" opacity="0">
+                                <animateMotion id="truckMotion" dur="3.6s" repeatCount="indefinite" begin="indefinite"><mpath id="truckPath" href="#route-lib"/></animateMotion>
+                            </circle>
+                        </svg>
+                        <figcaption data-i18n="cor_note">Esquema referencial, no a escala.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARA QUIÉN -->
+        <section id="segments" class="section segments">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2 data-i18n="seg_title">Para quién es FríoTrack</h2>
+                    <p class="lead" data-i18n="seg_sub">Dos roles que dependen uno del otro a lo largo de la cadena.</p>
+                </div>
+
+                <div class="tabs" role="tablist" data-i18n-aria="seg_aria" aria-label="Tipos de usuario">
+                    <button type="button" role="tab" id="tab-seg1" aria-controls="panel-seg1" aria-selected="true" tabindex="0" data-i18n="seg1_tab">Empresas de transporte refrigerado</button>
+                    <button type="button" role="tab" id="tab-seg2" aria-controls="panel-seg2" aria-selected="false" tabindex="-1" data-i18n="seg2_tab">Productores, exportadores y compradores</button>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-seg1" aria-labelledby="tab-seg1" tabindex="0">
+                    <p class="lead" data-i18n="seg1_lead">Operan las unidades de frío y responden por la temperatura hasta el destino.</p>
+                    <div class="seg-cols">
+                        <div>
+                            <h3 data-i18n="seg1_pains_title">Lo que les preocupa</h3>
+                            <ul class="plain">
+                                <li data-i18n="seg1_p1">No saber en qué estado térmico va la mercadería.</li>
+                                <li data-i18n="seg1_p2">No recibir alertas tempranas.</li>
+                                <li data-i18n="seg1_p3">No poder sustentar el rango pedido.</li>
+                                <li data-i18n="seg1_p4">Perder contratos con exportadores.</li>
+                            </ul>
+                        </div>
+                        <div class="gets">
+                            <h3 data-i18n="seg1_gets_title">Lo que obtienen con FríoTrack</h3>
+                            <ul class="checks">
+                                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="seg1_g1">Panel y alertas.</span></li>
+                                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="seg1_g2">Historial del viaje.</span></li>
+                                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="seg1_g3">Una ventaja competitiva.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-panel" role="tabpanel" id="panel-seg2" aria-labelledby="tab-seg2" tabindex="0" hidden>
+                    <p class="lead" data-i18n="seg2_lead">Despachan o reciben alimentos cuya calidad depende de una cadena de frío sin cortes.</p>
+                    <div class="seg-cols">
+                        <div>
+                            <h3 data-i18n="seg2_pains_title">Lo que les preocupa</h3>
+                            <ul class="plain">
+                                <li data-i18n="seg2_p1">No saber si el rango térmico se mantuvo.</li>
+                                <li data-i18n="seg2_p2">No poder anticipar el deterioro.</li>
+                                <li data-i18n="seg2_p3">No tener un canal formal con el transportista.</li>
+                                <li data-i18n="seg2_p4">No poder evaluar a sus transportistas.</li>
+                                <li data-i18n="seg2_p5">Auditorías que piden datos verificables.</li>
+                            </ul>
+                        </div>
+                        <div class="gets">
+                            <h3 data-i18n="seg2_gets_title">Lo que obtienen con FríoTrack</h3>
+                            <ul class="checks">
+                                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="seg2_g1">Aviso inmediato.</span></li>
+                                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="seg2_g2">Registros verificables.</span></li>
+                                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="seg2_g3">Datos para comparar proveedores.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLANES -->
+        <section id="pricing" class="section pricing">
+            <div class="wrap">
+                <div class="section-head center">
+                    <h2 data-i18n="prc_title">Planes</h2>
+                    <p class="lead" data-i18n="prc_sub">El precio depende del tamaño de tu flota.</p>
+                </div>
+
+                <div class="billing" role="group" data-i18n-aria="prc_aria" aria-label="Periodo de facturación">
+                    <button type="button" id="billMonthly" aria-pressed="true" data-i18n="prc_monthly">Mensual</button>
+                    <button type="button" id="billAnnual" aria-pressed="false">
+                        <span data-i18n="prc_annual">Anual</span>
+                        <small data-i18n="prc_annual_hint">2 meses gratis</small>
+                    </button>
+                </div>
+
+                <div class="plans">
+                    <article class="plan" data-plan="basic">
+                        <h3 data-i18n="plan_basic">Básico</h3>
+                        <p class="plan-desc" data-i18n="plan_basic_desc">Para operaciones pequeñas</p>
+                        <p class="price"><strong data-price></strong> <span data-price-unit></span></p>
+                        <ul class="checks">
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_basic_1">Hasta 5 unidades refrigeradas</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_basic_2">Panel de temperatura y humedad</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_basic_3">Alertas por desviación</span></li>
+                        </ul>
+                        <button type="button" class="btn btn-outline action-register" data-i18n="plan_cta">Empezar</button>
+                    </article>
+
+                    <article class="plan plan-featured" data-plan="pro">
+                        <span class="plan-badge" data-i18n="plan_badge">Recomendado</span>
+                        <h3 data-i18n="plan_pro">Profesional</h3>
+                        <p class="plan-desc" data-i18n="plan_pro_desc">Para flotas en crecimiento</p>
+                        <p class="price"><strong data-price></strong> <span data-price-unit></span></p>
+                        <ul class="checks">
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_pro_1">Hasta 25 unidades refrigeradas</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_pro_2">Mapa de rutas con GPS</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_pro_3">Historial exportable para auditorías</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_pro_4">Gestión de flota y conductores</span></li>
+                        </ul>
+                        <button type="button" class="btn btn-light action-register" data-i18n="plan_cta">Empezar</button>
+                    </article>
+
+                    <article class="plan" data-plan="ent">
+                        <h3 data-i18n="plan_ent">Empresarial</h3>
+                        <p class="plan-desc" data-i18n="plan_ent_desc">Para flotas grandes</p>
+                        <p class="price"><strong data-i18n="plan_ent_price">A medida</strong></p>
+                        <ul class="checks">
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_ent_1">Más de 25 unidades refrigeradas</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_ent_2">Acceso para transportista, exportador y comprador</span></li>
+                            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="plan_ent_3">Acompañamiento a medida</span></li>
+                        </ul>
+                        <a class="btn btn-outline" href="#contact" data-i18n="plan_cta_ent">Hablar con ventas</a>
+                    </article>
+                </div>
+                <p class="price-note" data-i18n="prc_note">Precios referenciales en soles. Se confirman al coordinar tu demostración.</p>
+            </div>
+        </section>
+
+        <!-- METAS -->
+        <section id="goals" class="section goals">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2 data-i18n="goals_title">Lo que nos comprometemos a medir</h2>
+                    <p class="lead" data-i18n="goals_sub">Estas son las metas de nuestros primeros meses de operación.</p>
+                </div>
+                <dl class="goal-list">
+                    <div><dt data-i18n="goal1_num">150</dt><dd data-i18n="goal1_txt">usuarios activos en los primeros 8 meses</dd></div>
+                    <div><dt data-i18n="goal2_num">Más de 75 %</dt><dd data-i18n="goal2_txt">de retención mensual desde el tercer mes</dd></div>
+                    <div><dt data-i18n="goal3_num">30 %</dt><dd data-i18n="goal3_txt">menos incidentes de ruptura de la cadena de frío en tránsito</dd></div>
+                    <div><dt data-i18n="goal4_num">NPS &gt; 40</dt><dd data-i18n="goal4_txt">después de 3 meses de uso de la plataforma</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- EQUIPO -->
+        <section id="team" class="section team">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2 data-i18n="team_title">El equipo</h2>
+                    <p class="lead" data-i18n="team_sub">Estudiantes de Ingeniería de Software de la UPC.</p>
+                </div>
+                <ul class="team-grid">
+                    <li class="member">
+                        <div class="avatar"><span aria-hidden="true">AA</span><img src="assets/images/team/u20241f246.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <h3>Alexander Sebastián Atauje Barreto</h3>
+                        <p class="role" data-i18n="team1_role">Frontend y prototipado</p>
+                        <p data-i18n="team1_desc">Desarrollo web frontend.</p>
+                    </li>
+                    <li class="member">
+                        <div class="avatar"><span aria-hidden="true">BB</span><img src="assets/images/team/u202421137.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <h3>Benjamín Elías Bardales Rodríguez</h3>
+                        <p class="role" data-i18n="team2_role">Lógica de negocio y arquitectura</p>
+                        <p data-i18n="team2_desc">Programación y bases de datos.</p>
+                    </li>
+                    <li class="member">
+                        <div class="avatar"><span aria-hidden="true">JD</span><img src="assets/images/team/u202219829.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <h3>Joaquín Leonardo Daga Chávez</h3>
+                        <p class="role" data-i18n="team3_role">Requisitos y documentación</p>
+                        <p data-i18n="team3_desc">Análisis de requisitos.</p>
+                    </li>
+                    <li class="member">
+                        <div class="avatar"><span aria-hidden="true">RS</span><img src="assets/images/team/u20241D811.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <h3>Rodrigo Andree Saavedra Flores</h3>
+                        <p class="role" data-i18n="team4_role">UX/UI e investigación</p>
+                        <p data-i18n="team4_desc">Diseño UX/UI con Figma.</p>
+                    </li>
+                    <li class="member">
+                        <div class="avatar"><span aria-hidden="true">NV</span><img src="assets/images/team/u20231H17.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <h3>Nayely Macarena Vera Solsol</h3>
+                        <p class="role" data-i18n="team5_role">Arquitectura, pruebas y datos</p>
+                        <p data-i18n="team5_desc">Diagramas de arquitectura.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contact" class="section contact">
+            <div class="wrap contact-grid">
+                <div class="contact-copy">
+                    <h2 data-i18n="ct_title">Cuéntanos cómo mueves tu carga</h2>
+                    <p class="lead" data-i18n="ct_lead">Deja tus datos y coordinamos una demostración de FríoTrack.</p>
+                    <ul class="checks checks-light">
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="ct_b1">Sin compromiso</span></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="ct_b2">Demostración con tu operación</span></li>
+                        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="ct_b3">Te ayudamos a definir tus rangos seguros</span></li>
+                    </ul>
+                </div>
+
+                <div class="form-card">
+                    <form id="contactForm" novalidate>
+                        <div class="field">
+                            <label for="ctName" data-i18n="f_name">Nombres y apellidos</label>
+                            <input type="text" id="ctName" name="name" autocomplete="name" required data-i18n-placeholder="f_name_ph" placeholder="Ej. Juan Pérez">
+                        </div>
+                        <div class="field">
+                            <label for="ctCompany" data-i18n="f_company">Empresa o razón social</label>
+                            <input type="text" id="ctCompany" name="company" autocomplete="organization" required data-i18n-placeholder="f_company_ph" placeholder="Ej. Transportes Andinos S.A.C.">
+                        </div>
+                        <div class="field">
+                            <label for="ctEmail" data-i18n="f_email">Correo electrónico</label>
+                            <input type="email" id="ctEmail" name="email" autocomplete="email" required data-i18n-placeholder="f_email_ph" placeholder="nombre@empresa.com">
+                        </div>
+                        <div class="field">
+                            <label for="ctPhone" data-i18n="f_phone">Celular</label>
+                            <input type="tel" id="ctPhone" name="phone" autocomplete="tel" inputmode="tel" required data-i18n-placeholder="f_phone_ph" placeholder="+51 999 888 777">
+                        </div>
+                        <div class="field">
+                            <label for="ctRole" data-i18n="f_role">Soy…</label>
+                            <select id="ctRole" name="role" required>
+                                <option value="" data-i18n="r_placeholder">Selecciona una opción</option>
+                                <option value="carrier" data-i18n="r_carrier">Empresa de transporte refrigerado</option>
+                                <option value="producer" data-i18n="r_producer">Productor o exportador</option>
+                                <option value="buyer" data-i18n="r_buyer">Comprador o planta de procesamiento</option>
+                                <option value="other" data-i18n="r_other">Otro</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" data-i18n="f_submit">Enviar mensaje</button>
+                    </form>
+
+                    <div class="form-success" id="contactSuccess" role="status" hidden>
+                        <svg class="icon icon-lg" aria-hidden="true"><use href="#i-check"/></svg>
+                        <h3 data-i18n="f_ok_title">Recibimos tus datos</h3>
+                        <p id="contactSuccessMsg"></p>
+                        <p class="form-demo" id="contactDemo" data-i18n="f_ok_demo" hidden>Versión demostrativa: por ahora los datos no se envían a ningún servidor.</p>
+                        <button type="button" class="btn btn-outline" id="contactAgain" data-i18n="f_ok_again">Enviar otro mensaje</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="site-footer">
+        <div class="wrap footer-grid">
+            <div class="footer-brand">
+                <a class="brand" href="#hero" data-i18n-aria="logo_label" aria-label="FríoTrack, ir al inicio">
+                    <img src="assets/images/logo.svg" alt="" width="36" height="36">
+                    <span class="brand-name">FríoTrack</span>
+                </a>
+                <p data-i18n="ft_tagline">Monitoreo de la cadena de frío en el transporte terrestre de alimentos perecibles.</p>
+            </div>
+            <div class="footer-links">
+                <h3 data-i18n="ft_product">Producto</h3>
+                <ul>
+                    <li><a href="#features" data-i18n="nav_what">Lo que hacemos</a></li>
+                    <li><a href="#steps" data-i18n="nav_how">Cómo funciona</a></li>
+                    <li><a href="#segments" data-i18n="nav_who">Para quién</a></li>
+                    <li><a href="#pricing" data-i18n="nav_pricing">Planes</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3 data-i18n="ft_company">Empresa</h3>
+                <ul>
+                    <li><a href="#about" data-i18n="nav_about">Quiénes somos</a></li>
+                    <li><a href="#team" data-i18n="nav_team">Equipo</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3 data-i18n="ft_legal">Legal</h3>
+                <ul>
+                    <li><a href="Terms-and-Condition.html" data-i18n="ft_terms">Términos y condiciones</a></li>
+                    <li><a href="Terms-and-Condition.html#datos" data-i18n="ft_data">Protección de datos</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
+        <div class="wrap footer-bottom">
+            <p data-i18n="ft_rights">© 2026 BlackStartup. Todos los derechos reservados.</p>
+            <p data-i18n="ft_course">Proyecto del curso Aplicaciones Web, UPC</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE INICIO DE SESIÓN / REGISTRO -->
+    <div id="authModal" class="modal" hidden>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button type="button" class="close-btn" id="closeModal" data-i18n-aria="auth_close" aria-label="Cerrar"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+            <h2 id="modalTitle" data-i18n="auth_login_title">Iniciar sesión</h2>
+            <form id="authForm">
+                <div class="field">
+                    <label for="authEmail" data-i18n="auth_email">Correo electrónico</label>
+                    <input type="email" id="authEmail" autocomplete="email" required data-i18n-placeholder="auth_email_ph" placeholder="nombre@empresa.com">
+                </div>
+                <div class="field" id="phoneGroup" hidden>
+                    <label for="authPhone" data-i18n="auth_phone">Celular</label>
+                    <input type="tel" id="authPhone" autocomplete="tel" inputmode="tel" data-i18n-placeholder="f_phone_ph" placeholder="+51 999 888 777">
+                </div>
+                <div class="field">
+                    <label for="authPassword" data-i18n="auth_password">Contraseña</label>
+                    <input type="password" id="authPassword" autocomplete="current-password" required
+                           data-i18n-placeholder="auth_password_ph" placeholder="Mín. 8 caracteres, 1 mayúscula y 1 número"
+                           aria-describedby="authPwdHint">
+                    <p class="field-hint" id="authPwdHint" data-i18n="auth_password_title" hidden>La contraseña debe tener al menos 8 caracteres, con una mayúscula, una minúscula y un número.</p>
+                </div>
+                <p class="auth-terms" id="authTerms" hidden><span data-i18n="auth_terms_pre">Al crear tu cuenta aceptas los </span><a href="Terms-and-Condition.html" data-i18n="auth_terms_link">términos y condiciones</a></p>
+                <button type="submit" class="btn btn-primary btn-block" id="authSubmitBtn" data-i18n="auth_login_btn">Ingresar</button>
+                <p class="auth-msg" id="authMsg" role="status" hidden data-i18n="auth_demo_msg">Esta es una versión demostrativa.</p>
+            </form>
+            <p class="auth-switch">
+                <span id="authSwitchText" data-i18n="auth_no_account">¿No tienes cuenta?</span>
+                <a href="#" id="authSwitchLink" data-i18n="auth_register_link">Regístrate aquí</a>
+            </p>
+        </div>
     </div>
-  </section>
 
-  <!-- PROBLEM -->
-  <section id="problem" class="problem">
-    <div class="container">
-      <h2 data-i18n="problem.title">A problem small businesses can't see coming</h2>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">33%+</div>
-          <p data-i18n="problem.stat1">of the food Peru produces is lost due to poor cold-chain handling.</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">9M</div>
-          <p data-i18n="problem.stat2">tons of food wasted every year in Peru alone (FAO / Escuela Peruana de Refrigeración).</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">0</div>
-          <p data-i18n="problem.stat3">affordable monitoring tools built for small bodegas, restaurants and pharmacies — until now.</p>
-        </div>
-      </div>
-      <p class="source-note">
-        Sources: FAO Perú, Escuela Peruana de Refrigeración (2019).
-      </p>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section id="how-it-works" class="how-it-works">
-    <div class="container">
-      <h2 data-i18n="how.title">How FríoTrack works</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-icon" aria-hidden="true">📋</div>
-          <h3 data-i18n="how.step1Title">1. Log</h3>
-          <p data-i18n="how.step1Text">Register your storage points and log temperature readings in seconds, from any device.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-icon" aria-hidden="true">📊</div>
-          <h3 data-i18n="how.step2Title">2. Monitor</h3>
-          <p data-i18n="how.step2Text">See the real-time status of every storage point in one simple dashboard.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-icon" aria-hidden="true">🔔</div>
-          <h3 data-i18n="how.step3Title">3. Get alerted</h3>
-          <p data-i18n="how.step3Text">Receive an automatic alert the moment a reading leaves the safe range — before the product is lost.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEGMENTS -->
-  <section id="segments" class="segments">
-    <div class="container">
-      <h2 data-i18n="segments.title">Built for the people who live the cold chain every day</h2>
-      <div class="segments-grid">
-        <div class="segment-card">
-          <h3 data-i18n="segments.owner.title">Business owners</h3>
-          <p data-i18n="segments.owner.text">
-            Bodegas, minimarkets, restaurants and pharmacies that store perishable products
-            and want to stop losing money to spoilage they can't see coming.
-          </p>
-        </div>
-        <div class="segment-card">
-          <h3 data-i18n="segments.courier.title">Delivery couriers</h3>
-          <p data-i18n="segments.courier.text">
-            Last-mile couriers who want a fast way to prove a product left — and arrived —
-            in safe condition, in under a minute per delivery.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="pricing">
-    <div class="container">
-      <h2 data-i18n="pricing.title">Simple pricing, built for small businesses</h2>
-      <div class="pricing-card">
-        <h3 data-i18n="pricing.planName">FríoTrack Starter</h3>
-        <p class="price"><span data-i18n="pricing.priceValue">S/ 29</span> <span data-i18n="pricing.pricePeriod">/ month per business</span></p>
-        <ul class="pricing-features">
-          <li data-i18n="pricing.f1">Up to 3 storage points</li>
-          <li data-i18n="pricing.f2">Unlimited temperature readings</li>
-          <li data-i18n="pricing.f3">Automatic email/WhatsApp alerts</li>
-          <li data-i18n="pricing.f4">Exportable traceability report</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary" data-i18n="pricing.cta">Get started</a>
-        <p class="pricing-note" data-i18n="pricing.note">Final pricing subject to validation with real business owners.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-    <div class="container contact-grid">
-      <div class="contact-copy">
-        <h2 data-i18n="contact.title">Tell us about your business</h2>
-        <p data-i18n="contact.subtitle">Leave your details and our team will reach out to show you how FríoTrack can fit your business.</p>
-      </div>
-      <form id="contactForm" class="contact-form" novalidate>
-        <div class="form-group">
-          <label for="fullName" data-i18n="contact.nameLabel">Full name</label>
-          <input type="text" id="fullName" name="fullName" required aria-required="true" />
-          <span class="form-error" id="fullNameError" role="alert"></span>
-        </div>
-        <div class="form-group">
-          <label for="email" data-i18n="contact.emailLabel">Email</label>
-          <input type="email" id="email" name="email" required aria-required="true" />
-          <span class="form-error" id="emailError" role="alert"></span>
-        </div>
-        <div class="form-group">
-          <label for="businessType" data-i18n="contact.businessLabel">Type of business</label>
-          <select id="businessType" name="businessType" required aria-required="true">
-            <option value="" data-i18n="contact.businessPlaceholder">Select one</option>
-            <option value="bodega" data-i18n="contact.businessBodega">Bodega / Minimarket</option>
-            <option value="restaurant" data-i18n="contact.businessRestaurant">Restaurant</option>
-            <option value="pharmacy" data-i18n="contact.businessPharmacy">Pharmacy</option>
-            <option value="courier" data-i18n="contact.businessCourier">Delivery / Courier service</option>
-            <option value="other" data-i18n="contact.businessOther">Other</option>
-          </select>
-          <span class="form-error" id="businessTypeError" role="alert"></span>
-        </div>
-        <div class="form-group">
-          <label for="message" data-i18n="contact.messageLabel">Message (optional)</label>
-          <textarea id="message" name="message" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full" data-i18n="contact.submit">Send</button>
-        <p class="form-success" id="formSuccess" role="status" aria-live="polite" hidden data-i18n="contact.success">
-          Thanks! We'll be in touch shortly.
-        </p>
-      </form>
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer" role="contentinfo">
-  <div class="container footer-grid">
-    <div>
-      <span class="brand-icon" aria-hidden="true">❄️</span> <strong>FríoTrack</strong>
-      <p data-i18n="footer.tagline">Cold-chain visibility for small businesses.</p>
-    </div>
-    <div>
-      <p><a href="terms.html" data-i18n="footer.terms">Terms of Service</a></p>
-      <p>UPC — Ingeniería de Software — 1ASI0730 Aplicaciones Web — NRC 8088</p>
-    </div>
-  </div>
-  <p class="footer-copy">© 2026 FríoTrack — BlackStartup Team. Student project, not a commercial product.</p>
-</footer>
-
-<script src="js/main.js"></script>
+    <script src="i18n/es.js"></script>
+    <script src="i18n/en.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/hero-sim.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
