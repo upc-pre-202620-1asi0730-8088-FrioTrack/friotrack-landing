@@ -19,8 +19,11 @@
   var burger = $('hamburgerBtn');
   var menu = $('mobileMenu');
 
+  var header = $('siteHeader');
+
   function setMenu(open) {
     menu.classList.toggle('open', open);
+    if (header) header.classList.toggle('menu-open', open);
     burger.classList.toggle('active', open);
     burger.setAttribute('aria-expanded', String(open));
     burger.setAttribute('aria-label', FT.t(open ? 'menu_close' : 'menu_open'));
