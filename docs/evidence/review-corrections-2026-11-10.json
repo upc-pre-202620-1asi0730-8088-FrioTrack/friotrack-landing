@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-10",
+  "project": "friotrack-landing",
+  "release": "0.1.0",
+  "result": "passed",
+  "scope": "Local source revision before deployment",
+  "static": {
+    "javascriptSyntax": { "result": "passed", "files": 7, "command": "node --check" },
+    "translationKeyParity": { "result": "passed", "keysPerLanguage": 274, "languages": ["es", "en"] },
+    "localHtmlReferences": { "result": "passed", "checked": 88, "broken": 0 }
+  },
+  "browser": {
+    "engine": "Chromium through Google Chrome",
+    "viewportWidths": [1440, 390],
+    "languages": ["es", "en"],
+    "checks": [
+      "Explicit URL language takes priority over browser language",
+      "No horizontal page overflow at the checked widths",
+      "No local password form in the landing",
+      "All referenced translation keys exist",
+      "Login links preserve coordinator or cargo-client role and selected language",
+      "Public registration link opens the cargo-client route with selected language",
+      "Escape closes the access selector",
+      "Demo contact reports that the request was not sent or saved",
+      "Contact reset restores the form",
+      "The terms data-protection anchor belongs to the selected language block"
+    ],
+    "contactTransport": {
+      "interceptedRequests": 3,
+      "externalSubmissions": 0,
+      "http500": "Error shown; form and entered name retained; no success state",
+      "networkFailure": "Error shown; form and entered name retained; no success state",
+      "http200": "Confirmation shown"
+    }
+  },
+  "limitations": [
+    "The configured contact endpoint remains null; a commercial receiver is not implemented",
+    "No Azure deployment was performed by these checks",
+    "These checks do not establish full WCAG conformance",
+    "The hero panel uses simulated data"
+  ]
+}
