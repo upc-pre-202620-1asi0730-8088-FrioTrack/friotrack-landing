@@ -5,11 +5,9 @@
 
   /* ---------- Configuración editable ---------- */
   // Precios referenciales en soles (PEN). Anual = 10 meses (2 meses gratis).
-  var PLANS = { basic: 79, pro: 199 };
+  var PLANS = window.FT_CONFIG.plans;
   // Cuando exista un backend, coloca aquí la URL a la que se enviará el formulario de contacto.
-  var CONTACT_ENDPOINT = null;
-  // Regla de contraseña del registro (8+ caracteres, mayúscula, minúscula y número).
-  var PWD_PATTERN = '(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}';
+  var CONTACT_ENDPOINT = window.FT_CONFIG.contactEndpoint;
 
   var FT = window.FT;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -38,39 +36,21 @@
 
   /* ---------- 2. Modal de acceso / registro ---------- */
   var modal = $('authModal');
-  var authForm = $('authForm');
   var authTitle = $('modalTitle');
-  var authSubmit = $('authSubmitBtn');
-  var phoneGroup = $('phoneGroup');
-  var authPhone = $('authPhone');
-  var authPassword = $('authPassword');
-  var authTerms = $('authTerms');
-  var pwdHint = $('authPwdHint');
-  var authMsg = $('authMsg');
-  var switchText = $('authSwitchText');
-  var switchLink = $('authSwitchLink');
   var isLogin = true;
   var lastFocus = null;
 
   function renderAuth() {
     authTitle.setAttribute('data-i18n', isLogin ? 'auth_login_title' : 'auth_register_title');
-    authSubmit.setAttribute('data-i18n', isLogin ? 'auth_login_btn' : 'auth_register_btn');
-    switchText.setAttribute('data-i18n', isLogin ? 'auth_no_account' : 'auth_has_account');
-    switchLink.setAttribute('data-i18n', isLogin ? 'auth_register_link' : 'auth_login_link');
     authTitle.textContent = FT.t(authTitle.getAttribute('data-i18n'));
-    authSubmit.textContent = FT.t(authSubmit.getAttribute('data-i18n'));
-    switchText.textContent = FT.t(switchText.getAttribute('data-i18n'));
-    switchLink.textContent = FT.t(switchLink.getAttribute('data-i18n'));
-    phoneGroup.hidden = isLogin;
-    authTerms.hidden = isLogin;
-    authPhone.required = !isLogin;
-    authPassword.setAttribute('autocomplete', isLogin ? 'current-password' : 'new-password');
-    // La regla de seguridad solo se exige al crear la cuenta, no al iniciar sesión.
-    if (isLogin) authPassword.removeAttribute('pattern'); else authPassword.setAttribute('pattern', PWD_PATTERN);
-    authPassword.setAttribute('data-i18n-placeholder', isLogin ? 'auth_password_ph_login' : 'auth_password_ph');
-    authPassword.setAttribute('placeholder', FT.t(isLogin ? 'auth_password_ph_login' : 'auth_password_ph'));
-    pwdHint.hidden = isLogin;
-    authMsg.hidden = true;
+    $('loginOptions').hidden = !isLogin;
+    $('registerOptions').hidden = isLogin;
+    document.querySelectorAll('[data-app-route]').forEach(function (link) {
+      var url = new URL(window.FT_CONFIG.applicationUrl);
+      var query = new URLSearchParams({ role: link.dataset.appRole, lang: FT.lang });
+      url.hash = '/' + link.dataset.appRoute + '?' + query.toString();
+      link.href = url.href;
+    });
   }
 
   function openModal(mode) {
@@ -80,13 +60,11 @@
     renderAuth();
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
-    $('authEmail').focus();
+    modal.querySelector(isLogin ? '#loginOptions a' : '#registerOptions a').focus();
   }
   function closeModal() {
     modal.hidden = true;
     document.body.style.overflow = '';
-    authForm.reset();
-    authMsg.hidden = true;
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
@@ -97,17 +75,9 @@
   });
   $('closeModal').addEventListener('click', closeModal);
   modal.addEventListener('mousedown', function (e) { if (e.target === modal) closeModal(); });
-  switchLink.addEventListener('click', function (e) {
-    e.preventDefault();
-    isLogin = !isLogin;
-    renderAuth();
-  });
-  authForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!authForm.checkValidity()) { authForm.reportValidity(); return; }
-    authMsg.hidden = false; // versión demostrativa: aún no hay backend
-  });
-  document.addEventListener('ft:lang', function () { if (!modal.hidden) renderAuth(); });
+  $('accessContact').addEventListener('click', closeModal);
+  document.addEventListener('ft:lang', renderAuth);
+  renderAuth();
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
@@ -203,9 +173,23 @@
   /* ---------- 7. Formulario de contacto ---------- */
   var form = $('contactForm');
   var success = $('contactSuccess');
+  var contactError = $('contactError');
+  var submitButton = form.querySelector('[type="submit"]');
+  var lastContactName = '';
+  var sending = false;
+  $('contactNotice').hidden = !!CONTACT_ENDPOINT;
+
+  function renderContactResult() {
+    $('contactResultTitle').setAttribute('data-i18n', CONTACT_ENDPOINT ? 'f_ok_title' : 'f_demo_title');
+    $('contactResultTitle').textContent = FT.t(CONTACT_ENDPOINT ? 'f_ok_title' : 'f_demo_title');
+    $('contactSuccessMsg').textContent = FT.t(CONTACT_ENDPOINT ? 'f_ok_msg' : 'f_demo_msg', { name: lastContactName });
+  }
+  document.addEventListener('ft:lang', renderContactResult);
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (sending) return;
+    contactError.hidden = true;
     form.classList.add('was-validated');
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
@@ -213,18 +197,31 @@
     new FormData(form).forEach(function (v, k) { payload[k] = v; });
 
     var done = function () {
-      $('contactSuccessMsg').textContent = FT.t('f_ok_msg', { name: payload.name.split(' ')[0] });
+      lastContactName = payload.name.trim().split(/\s+/)[0];
+      renderContactResult();
       $('contactDemo').hidden = !!CONTACT_ENDPOINT; // sin backend, se avisa que es una demostración
       form.hidden = true;
       success.hidden = false;
     };
 
     if (CONTACT_ENDPOINT) {
+      sending = true;
+      submitButton.disabled = true;
+      form.setAttribute('aria-busy', 'true');
       fetch(CONTACT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).then(done).catch(done);
+      }).then(function (response) {
+        if (!response.ok) throw new Error('contact-rejected');
+        done();
+      }).catch(function () {
+        contactError.hidden = false;
+      }).finally(function () {
+        sending = false;
+        submitButton.disabled = false;
+        form.removeAttribute('aria-busy');
+      });
     } else {
       done(); // sin backend: solo confirma en pantalla
     }

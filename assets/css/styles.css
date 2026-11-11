@@ -641,3 +641,10 @@ body.has-hero .site-header.is-scrolled { box-shadow: 0 8px 24px -16px rgba(15, 2
     .marquee-dup { display: none; }
     .js .reveal { opacity: 1; transform: none; }
 }
+
+/* Access links and contact delivery states */
+.access-intro { color: var(--slate-dark); margin-bottom: 18px; }
+.access-options { display: grid; gap: 12px; }
+.access-options .btn-block { white-space: normal; text-align: center; }
+.form-error { margin-top: 14px; color: #b42318; font-size: .9rem; }
+button:disabled { cursor: wait; opacity: .65; }

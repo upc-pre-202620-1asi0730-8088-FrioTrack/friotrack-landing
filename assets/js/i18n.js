@@ -17,6 +17,8 @@
   var current = DEFAULT_LANG;
 
   function detect() {
+    var requested = new URLSearchParams(location.search).get('lang');
+    if (requested && dict[requested]) return requested;
     var saved = null;
     try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) { /* storage bloqueado */ }
     if (saved && dict[saved]) return saved;

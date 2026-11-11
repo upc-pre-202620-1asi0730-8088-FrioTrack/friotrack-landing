@@ -13,7 +13,7 @@
     <meta property="og:site_name" content="FríoTrack">
     <meta property="og:title" content="FríoTrack | Monitoreo de la cadena de frío en transporte">
     <meta property="og:description" content="Sabe en todo momento si tu carga refrigerada sigue en rango.">
-    <meta property="og:image" content="https://upc-pre-202620-1asi0730-8088-friotrack.github.io/friotrack-landing/assets/images/og-friotrack.png">
+    <meta property="og:image" content="https://friotracktb1bce6db1b.z22.web.core.windows.net/landing/assets/images/og-friotrack.png">
     <meta property="og:image:alt" content="FríoTrack: monitoreo de la cadena de frío en el transporte terrestre">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
@@ -590,25 +590,25 @@
                         <p data-i18n="team1_desc">Desarrollo web frontend.</p>
                     </li>
                     <li class="member reveal">
-                        <div class="avatar"><span aria-hidden="true">BB</span><img src="assets/images/team/u202421137.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <div class="avatar" aria-hidden="true"><span>BB</span></div>
                         <h3>Benjamín Elías Bardales Rodríguez</h3>
                         <p class="role" data-i18n="team2_role">Lógica de negocio y arquitectura</p>
                         <p data-i18n="team2_desc">Programación y bases de datos.</p>
                     </li>
                     <li class="member reveal">
-                        <div class="avatar"><span aria-hidden="true">JD</span><img src="assets/images/team/u202219829.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <div class="avatar" aria-hidden="true"><span>JD</span></div>
                         <h3>Joaquín Leonardo Daga Chávez</h3>
                         <p class="role" data-i18n="team3_role">Requisitos y documentación</p>
                         <p data-i18n="team3_desc">Análisis de requisitos.</p>
                     </li>
                     <li class="member reveal">
-                        <div class="avatar"><span aria-hidden="true">RS</span><img src="assets/images/team/u20241D811.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <div class="avatar" aria-hidden="true"><span>RS</span></div>
                         <h3>Rodrigo Andree Saavedra Flores</h3>
                         <p class="role" data-i18n="team4_role">UX/UI e investigación</p>
                         <p data-i18n="team4_desc">Diseño UX/UI con Figma.</p>
                     </li>
                     <li class="member reveal">
-                        <div class="avatar"><span aria-hidden="true">NV</span><img src="assets/images/team/u20231H17.png" alt="" loading="lazy" onerror="this.remove()"></div>
+                        <div class="avatar" aria-hidden="true"><span>NV</span></div>
                         <h3>Nayely Macarena Vera Solsol</h3>
                         <p class="role" data-i18n="team5_role">Arquitectura, pruebas y datos</p>
                         <p data-i18n="team5_desc">Diagramas de arquitectura.</p>
@@ -633,6 +633,7 @@
                 </div>
 
                 <div class="form-card reveal">
+                    <p class="form-demo" id="contactNotice" data-i18n="f_ok_demo">Versión demostrativa: por ahora los datos no se envían a ningún servidor.</p>
                     <form id="contactForm" novalidate>
                         <div class="field">
                             <label for="ctName" data-i18n="f_name">Nombres y apellidos</label>
@@ -661,11 +662,12 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block" data-i18n="f_submit">Enviar mensaje</button>
+                        <p class="form-error" id="contactError" role="alert" data-i18n="f_error" hidden>No se pudo enviar el mensaje. Conservamos tus datos en el formulario para que vuelvas a intentarlo.</p>
                     </form>
 
                     <div class="form-success" id="contactSuccess" role="status" hidden>
                         <svg class="icon icon-lg" aria-hidden="true"><use href="#i-check"/></svg>
-                        <h3 data-i18n="f_ok_title">Recibimos tus datos</h3>
+                        <h3 id="contactResultTitle" data-i18n="f_demo_title">Demostración completada</h3>
                         <p id="contactSuccessMsg"></p>
                         <p class="form-demo" id="contactDemo" data-i18n="f_ok_demo" hidden>Versión demostrativa: por ahora los datos no se envían a ningún servidor.</p>
                         <button type="button" class="btn btn-outline" id="contactAgain" data-i18n="f_ok_again">Enviar otro mensaje</button>
@@ -721,30 +723,16 @@
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
             <button type="button" class="close-btn" id="closeModal" data-i18n-aria="auth_close" aria-label="Cerrar"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
             <h2 id="modalTitle" data-i18n="auth_login_title">Iniciar sesión</h2>
-            <form id="authForm">
-                <div class="field">
-                    <label for="authEmail" data-i18n="auth_email">Correo electrónico</label>
-                    <input type="email" id="authEmail" autocomplete="email" required data-i18n-placeholder="auth_email_ph" placeholder="nombre@empresa.com">
-                </div>
-                <div class="field" id="phoneGroup" hidden>
-                    <label for="authPhone" data-i18n="auth_phone">Celular</label>
-                    <input type="tel" id="authPhone" autocomplete="tel" inputmode="tel" data-i18n-placeholder="f_phone_ph" placeholder="+51 999 888 777">
-                </div>
-                <div class="field">
-                    <label for="authPassword" data-i18n="auth_password">Contraseña</label>
-                    <input type="password" id="authPassword" autocomplete="current-password" required
-                           data-i18n-placeholder="auth_password_ph" placeholder="Mín. 8 caracteres, 1 mayúscula y 1 número"
-                           aria-describedby="authPwdHint">
-                    <p class="field-hint" id="authPwdHint" data-i18n="auth_password_title" hidden>La contraseña debe tener al menos 8 caracteres, con una mayúscula, una minúscula y un número.</p>
-                </div>
-                <p class="auth-terms" id="authTerms" hidden><span data-i18n="auth_terms_pre">Al crear tu cuenta aceptas los </span><a href="Terms-and-Condition.html" data-i18n="auth_terms_link">términos y condiciones</a></p>
-                <button type="submit" class="btn btn-primary btn-block" id="authSubmitBtn" data-i18n="auth_login_btn">Ingresar</button>
-                <p class="auth-msg" id="authMsg" role="status" hidden data-i18n="auth_demo_msg">Esta es una versión demostrativa.</p>
-            </form>
-            <p class="auth-switch">
-                <span id="authSwitchText" data-i18n="auth_no_account">¿No tienes cuenta?</span>
-                <a href="#" id="authSwitchLink" data-i18n="auth_register_link">Regístrate aquí</a>
-            </p>
+            <p class="access-intro" data-i18n="auth_access_note">Continúa en la aplicación para identificarte con tu cuenta. La selección del perfil no concede permisos.</p>
+            <div id="loginOptions" class="access-options">
+                <a class="btn btn-primary btn-block" data-app-route="login" data-app-role="coordinator" data-i18n="auth_coordinator" href="https://friotracktb1bce6db1b.z22.web.core.windows.net/#/login?role=coordinator&amp;lang=es">Coordinador logístico</a>
+                <a class="btn btn-outline btn-block" data-app-route="login" data-app-role="cargo-client" data-i18n="auth_cargo_client" href="https://friotracktb1bce6db1b.z22.web.core.windows.net/#/login?role=cargo-client&amp;lang=es">Cliente de carga</a>
+            </div>
+            <div id="registerOptions" class="access-options" hidden>
+                <a class="btn btn-primary btn-block" data-app-route="register" data-app-role="cargo-client" data-i18n="auth_register_client" href="https://friotracktb1bce6db1b.z22.web.core.windows.net/#/register?role=cargo-client&amp;lang=es">Crear cuenta de cliente de carga</a>
+                <p class="field-hint" data-i18n="auth_coordinator_note">El registro público crea cuentas de cliente de carga. El acceso de coordinador requiere una cuenta habilitada.</p>
+                <a class="btn btn-outline btn-block" id="accessContact" href="#contact" data-i18n="nav_contact">Contacto</a>
+            </div>
         </div>
     </div>
 
@@ -752,6 +740,7 @@
     <script src="i18n/en.js"></script>
     <script src="assets/js/i18n.js"></script>
     <script src="assets/js/hero-sim.js"></script>
+    <script src="assets/js/config.js"></script>
     <script src="assets/js/app.js"></script>
     <script src="assets/js/ui.js"></script>
 </body>
