@@ -1,5 +1,14 @@
 # Registro de cambios
 
+## 0.2.0 — 13 de noviembre de 2026
+
+- Inglés por defecto, con prioridad para el idioma explícito de la URL y la preferencia guardada; locales `en-US` y `es-419`.
+- Secciones opcionales About-the-Product y About-the-Team configurables con enlaces YouTube publicados. Los valores iniciales vacíos no muestran tarjetas ni reproductores.
+- Reproductores accesibles con carga tras pulsar Reproducir y origen `youtube-nocookie.com`.
+- Comprobaciones de traducciones, preferencia de idioma y carga segura de videos con `node --test tests/*.test.cjs`.
+
+Las grabaciones y su publicación siguen pendientes. Estos cambios no acreditan un nuevo despliegue Azure.
+
 ## 0.1.0 — 10 de noviembre de 2026
 
 - Los CTA de acceso abren la SPA publicada con perfil e idioma; el registro público corresponde a clientes de carga.

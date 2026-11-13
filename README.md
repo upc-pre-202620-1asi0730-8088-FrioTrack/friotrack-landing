@@ -50,13 +50,21 @@ Abre `index.html` con doble clic, o levanta un servidor:
 python -m http.server 8000
 ```
 
-Visita `http://localhost:8000/?lang=es` y `http://localhost:8000/?lang=en`. El parámetro válido de la URL tiene prioridad sobre la preferencia guardada y el idioma del navegador. La selección se conserva entre páginas con `localStorage`; si se bloquea el almacenamiento, la página sigue funcionando.
+Visita `http://localhost:8000/?lang=es` y `http://localhost:8000/?lang=en`. El parámetro válido de la URL tiene prioridad sobre la preferencia guardada. Si ninguna existe, se utiliza inglés, independientemente del idioma del navegador. La selección se conserva entre páginas con `localStorage`; si se bloquea el almacenamiento, la página sigue funcionando. Los locales son `en-US` y `es-419`.
 
 Revisa ambos perfiles y el registro desde los CTA, teclado y Escape en el selector, menú móvil, pestañas, conmutador de planes, simulación y contacto. Las validaciones de cada versión figuran en `docs/releases/`.
 
 ## Configuración y publicación
 
 Edita `assets/js/config.js` para cambiar `applicationUrl`, `contactEndpoint` o los precios referenciales. Usa únicamente configuración pública. Mantén las mismas claves en los diccionarios. Si cambia la URL pública de la landing, actualiza `og:image` en `index.html`.
+
+### Videos de producto y equipo
+
+`videos.product.youtubeUrl` y `videos.team.youtubeUrl` aceptan únicamente enlaces HTTPS de YouTube con un identificador válido. Sus valores iniciales son `null`: la sección y las tarjetas no se muestran mientras no exista una URL publicada válida. `streamUrl` permite registrar la referencia institucional que se incorporará al reporte; no se incrusta el Stream privado en el sitio público.
+
+El reproductor se crea con `youtube-nocookie.com` después de pulsar Reproducir. No se cargan iframes vacíos ni videos de ejemplo. Los títulos y botones son bilingües. Configurar un enlace no certifica que su contenido cumpla el enunciado ni que esté disponible para todos los visitantes; revisar la publicación antes de desplegar.
+
+Las grabaciones, opiniones de usuarios y testimonios del equipo permanecen pendientes de material auténtico. La preparación de estas secciones no se presenta como videos completados.
 
 Publica los HTML, `assets/` e `i18n/` en `/landing/` del hosting estático, preservando los archivos de la SPA en la raíz. GitHub Pages puede usarse como hosting alternativo si se configura explícitamente; el destino de TB1 documentado es Azure.
 

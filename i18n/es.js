@@ -1,4 +1,4 @@
-/* FríoTrack — Diccionario en español (idioma base).
+/* FríoTrack — Diccionario en español latinoamericano.
    Se carga con <script> para que el sitio funcione también abriendo index.html con doble clic. */
 window.FT_I18N = window.FT_I18N || {};
 window.FT_I18N.es = {
@@ -6,6 +6,15 @@ window.FT_I18N.es = {
   meta_desc: "Monitorea en tiempo casi real la temperatura, la humedad y la ubicación de tus unidades refrigeradas. Recibe alertas y consulta el historial del viaje.",
   og_desc: "Sabe en todo momento si tu carga refrigerada sigue en rango.",
   terms_meta_title: "Términos y condiciones | FríoTrack",
+  videos_eyebrow: "Conoce FríoTrack",
+  videos_title: "Conoce el producto y al equipo",
+  videos_product_title: "FríoTrack en acción",
+  videos_product_description: "Descubre la programación de envíos, el seguimiento de la cadena de frío y a las personas que usan FríoTrack.",
+  videos_product_play: "Reproducir video del producto",
+  videos_team_title: "El equipo detrás de FríoTrack",
+  videos_team_description: "Conoce a las personas que construyen FríoTrack y cómo trabajan juntas.",
+  videos_team_play: "Reproducir video del equipo",
+  videos_youtube: "Ver en YouTube",
 
   skip: "Saltar al contenido",
   nav_label: "Navegación principal",
